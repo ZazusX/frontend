@@ -5,6 +5,13 @@
       {{ content.attributes.description }}
       <hr />
       {{ content.attributes.tags }}
+      <hr />
+      <div class="" v-if="content.attributes.mobileImage">
+        {{ content.attributes.mobileImage.data }}
+      </div>
+      <div class="" v-if="content.attributes.desktopImage">
+        {{ content.attributes.desktopImage.data }}
+      </div>
     </li>
   </ul>
 </template>
@@ -13,11 +20,17 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 interface Content {
-  id: number;
+  id: Number;
   attributes: {
     title: Text;
     description: Text;
     tags: Text;
+    mobileImage?: {
+      data: any;
+    };
+    desktopImage?: {
+      data: any;
+    };
   };
 }
 interface Contents {
@@ -34,7 +47,7 @@ export default defineComponent({
   methods: {
     async fetchContents() {
       const contentsResponse = await axios.get<Contents>(
-        "http://localhost:3033/api/contents"
+        "http://localhost:3033/api/contents?populate=*"
       );
       this.pages = contentsResponse.data.data;
     },
