@@ -10,10 +10,14 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
+    "@sindresorhus/slugify": "^2.2.0",
+    "@types/marked": "^4.0.8",
     "core-js": "^3.25.3",
+    "marked": "^4.3.0",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
+    "vue-slugify": "^0.1.0",
     "vue-template-compiler": "^2.7.10"
   },
   "devDependencies": {
