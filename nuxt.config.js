@@ -18,7 +18,9 @@ export default {
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       { rel: "stylesheet", type: "text/css", href: "/assets/css/styles.css" },
     ],
-    script: [{ type: "text/javascript", src: "/assets/js/setup.js" }],
+    script: [
+      { type: "text/javascript", src: "/assets/js/setup.js", body: true },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

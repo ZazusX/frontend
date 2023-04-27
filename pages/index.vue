@@ -16,18 +16,13 @@
         </svg>
       </button>
     </header>
-    <Navigation :pages="pages" />
-    <article>
-      <div>
-        <div
-          v-for="(page, index) in pages"
-          :key="index"
-          class="list-group-item"
-        >
-          {{ page }}
-        </div>
-      </div>
-    </article>
+    <Navigation :data="pages" />
+    <div v-for="(page, index) in pages" :key="index">
+      <Contents
+        v-if="page.attributes.content_pages.data.length > 0"
+        :contents="page.attributes.content_pages.data"
+      />
+    </div>
     <footer>
       <a href="#">IMPRESSUM</a> &nbsp; . &nbsp; <a href="#">AGB</a> &nbsp; .
       &nbsp; <a href="#">DATENSCHUTZERKLÄRUNG</a> &nbsp; . &nbsp;
@@ -38,38 +33,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import "marked";
 import axios from "axios";
-import Navigation from "@/components/Nav.vue";
+import Navigation from "~/components/Nav.vue";
+import Contents from "~/components/Contents.vue";
 
-interface Content {
-  id: Number;
-  attributes: {
-    title: Text;
-    description: Text;
-    tags: Text;
-    mobileImage?: {
-      data: any;
-    };
-    desktopImage?: {
-      data: any;
-    };
-  };
-}
-interface Content {
-  id: Number;
-  attributes: {
-    title: Text;
-    description: Text;
-    tags: Text;
-    mobileImage?: {
-      data: any;
-    };
-    desktopImage?: {
-      data: any;
-    };
-  };
-}
 interface Category {
   id: Number;
   attributes: {
@@ -92,7 +59,7 @@ interface Page {
   attributes: {
     title: Text;
     content_pages: {
-      data: Content[];
+      data: Array<any>;
     };
     sub_pages: {
       data: Category[];
@@ -103,7 +70,7 @@ interface Page {
   };
 }
 interface Pages {
-  data: Page[];
+  data: Array<Page>;
 }
 export default defineComponent({
   name: "PageContent",
@@ -126,6 +93,7 @@ export default defineComponent({
   },
   components: {
     Navigation,
+    Contents,
   },
 });
 </script>

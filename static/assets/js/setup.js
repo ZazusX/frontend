@@ -7,12 +7,12 @@ function setSize() {
   } else {
     resize = document.body.clientHeight / 911;
   }
-  document.body.style.setProperty('--zoom', resize);
+  document.body.style.setProperty("--zoom", resize);
 }
 setSize();
-window.addEventListener('resize', (event) => {
+window.addEventListener("resize", (event) => {
   setSize();
 });
-document.querySelector('.toggle').addEventListener('click', () => {
-  document.body.classList.toggle('open');
+document.querySelector(".toggle").addEventListener("click", () => {
+  document.body.classList.toggle("open");
 });

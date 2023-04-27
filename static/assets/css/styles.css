@@ -9,7 +9,7 @@ html {
   font-size: 20px;
 }
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   position: relative;
   background: #f1f1f1;
   color: #23304d;
@@ -52,7 +52,7 @@ h2 {
   line-height: 1em;
   font-weight: 400;
 }
-h1 + p {
+h1 + div {
   margin-top: 20px;
 }
 p + p {
@@ -157,7 +157,7 @@ nav > ul > li > a.active {
   font-size: 21.3px;
 }
 nav > ul > li > a::before {
-  content: '>';
+  content: ">";
   display: inline-block;
   transform: rotate(90deg);
   margin-right: 0.2em;
@@ -190,6 +190,7 @@ a.active::before {
     transform: scale(clamp(0.5, var(--zoom), 2));
     transform-origin: left top;
     background-color: #fff;
+    overflow: hidden;
   }
   .background {
     position: absolute;
@@ -244,7 +245,7 @@ a.active::before {
     padding: 0;
   }
   main {
-    width: 342px;
+    width: 100%;
   }
   aside {
     position: absolute;
@@ -293,7 +294,7 @@ a.active::before {
     font-size: 21.3px;
   }
   nav > ul > li > a::before {
-    content: '>';
+    content: ">";
     display: inline-block;
     transform: rotate(90deg);
     margin-right: 0.2em;
