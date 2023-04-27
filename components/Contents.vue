@@ -43,7 +43,7 @@
       name: "Contents",
       props: {
         contents: {
-          type: Object as () => Contents,
+          type: [] as Content[],
         },
       },
       data() {

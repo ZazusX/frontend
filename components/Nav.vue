@@ -72,7 +72,7 @@ export default defineComponent({
   name: "Nav",
   props: {
     data: {
-      type: Object as () => Pages,
+      type: [] as Page[],
     },
   },
   data() {
