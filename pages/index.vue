@@ -16,11 +16,12 @@
         </svg>
       </button>
     </header>
-    <Navigation :data="pages" />
+    <Navigation :data="pages" @navigate="navigate($event)" />
     <div v-for="(page, index) in pages" :key="index">
       <Contents
         v-if="page.attributes.content_pages.data.length > 0"
         :contents="page.attributes.content_pages.data"
+        :activePage="active"
       />
     </div>
     <footer>
@@ -77,7 +78,7 @@ export default defineComponent({
   data() {
     return {
       pages: [] as Page[],
-      fetchingContents: false,
+      active: "",
     };
   },
   methods: {
@@ -86,6 +87,9 @@ export default defineComponent({
         "http://localhost:3033/api/root-pages?populate=*"
       );
       this.pages = contentsResponse.data.data;
+    },
+    navigate(page: string) {
+      this.active = page;
     },
   },
   async mounted() {

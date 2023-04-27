@@ -1,12 +1,10 @@
 <template>
   <div>
-    <article
-      v-for="(content, index) in contents"
-      :key="index"
-      :title="content.attributes.Title"
-    >
+    <article v-for="(content, index) in contents"
+      :key="content.attributes.Title" :ref="content.attributes.Title"
+      :data-title="content.attributes.Title" v-if="activePage === content.attributes.Title">
       <main>
-        <h1>{{ content.attributes.Title }}</h1>
+        <h1>{{ content.attributes.Title }} </h1>
         <div v-html="formatRte(content.attributes.Description)"></div>
       </main>
       <img :src="content.attributes.desktopImage?.data.attributes.url" alt="" class="background" />
@@ -36,7 +34,6 @@
         };
       };
     }
-
     interface Contents extends Array<Content> {}
 
     export default defineComponent({
@@ -45,9 +42,14 @@
         contents: {
           type: [] as Content[],
         },
+        activePage: {
+          type: String
+        }
       },
       data() {
-        return {};
+        return {
+         
+        };
       },
       methods: {
         convert(str: string) {
@@ -66,7 +68,7 @@
             return marked(str);
           }
         }
-      },
+      },      
     });
   </script>
 </template>

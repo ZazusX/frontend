@@ -14,7 +14,7 @@
             v-for="(subpage, index) in page.attributes.content_pages.data"
             :key="index"
           >
-            <a :href="subpage.attributes.Title">
+            <a href="#" @click="navigate(subpage.attributes.Title)">
               {{ subpage.attributes.Title }}
             </a>
           </li>
@@ -89,6 +89,9 @@ export default defineComponent({
           .replace(/-+/g, "-");
         return str;
       }
+    },
+    navigate(url: string) {
+      this.$emit("navigate", url);
     },
   },
 });
