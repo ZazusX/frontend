@@ -2,7 +2,7 @@
   <div>
     <article v-for="(content, index) in contents"
       :key="content.attributes.Title" :ref="content.attributes.Title"
-      :data-title="content.attributes.Title" v-if="activePage === content.attributes.Title">
+      :data-title="content.attributes.Title" :class="{hiddenPage: (activePage !== content.attributes.Title)}">
       <main>
         <h1>{{ content.attributes.Title }} </h1>
         <div v-html="formatRte(content.attributes.Description)"></div>

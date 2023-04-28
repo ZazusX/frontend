@@ -144,11 +144,12 @@ nav ul ul li + li {
   margin-top: 10px;
 }
 nav ul ul {
-  padding: 27px 0 17px 22px;
+  margin: 0 0 17px 22px;
   line-height: 1em;
   font-size: 16px;
-  transform: scaleY(0);
   max-height: 0;
+  overflow: hidden;
+  transition: all 333ms ease-out;
 }
 nav > ul > li > a {
   display: inline-block;
@@ -163,12 +164,15 @@ nav > ul > li > a::before {
   margin-right: 0.2em;
 }
 nav > ul > li > a.active + ul {
-  max-height: max-content;
-  transform: scaleY(1);
+  margin-top: 27px;
+  max-height: 500px;
 }
 a.active::before {
   display: none;
 }
+
+/* Transition
+*/
 
 @media (min-width: 768px) {
   body {
@@ -283,7 +287,6 @@ a.active::before {
     margin-top: 10px;
   }
   nav ul ul {
-    padding: 27px 0 17px 22px;
     line-height: 1em;
     font-size: 16px;
   }
@@ -300,6 +303,18 @@ a.active::before {
     margin-right: 0.2em;
   }
   a.active::before {
+    display: none;
+  }
+  article {
+    position: absolute;
+    transition: all 333ms ease-out;
+    opacity: 1;
+  }
+  .hiddenPage {
+    opacity: 0;
+    transform: translate(100%, 0);
+  }
+  .background {
     display: none;
   }
 }

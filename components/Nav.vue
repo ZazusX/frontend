@@ -3,9 +3,10 @@
     <ul>
       <li v-for="(page, index) in data" :key="page.id">
         <a
-          :href="convert(page.attributes.Title)"
+          :href="'#' + convert(page.attributes.Title)"
           :title="page.attributes.Title"
-          :class="{ active: index == 0 }"
+          @click="navigateRoot(page.attributes.Title, index)"
+          :class="{ active: activeRoot === index }"
         >
           {{ page.attributes.Title }}
         </a>
@@ -14,7 +15,16 @@
             v-for="(subpage, index) in page.attributes.content_pages.data"
             :key="index"
           >
-            <a href="#" @click="navigate(subpage.attributes.Title)">
+            <a
+              :href="
+                '#' +
+                convert(page.attributes.Title) +
+                '/' +
+                convert(subpage.attributes.Title)
+              "
+              @click="navigate(subpage.attributes.Title, index)"
+              :class="{ active: activeIndex === index }"
+            >
               {{ subpage.attributes.Title }}
             </a>
           </li>
@@ -24,9 +34,16 @@
             v-for="(profilepage, index) in page.attributes.profile_pages.data"
             :key="index"
           >
-            <a :href="convert(profilepage.attributes.Name)">{{
-              profilepage.attributes.Name
-            }}</a>
+            <a
+              :href="
+                '#' +
+                convert(page.attributes.Title) +
+                '/' +
+                convert(profilepage.attributes.Name)
+              "
+            >
+              {{ profilepage.attributes.Name }}
+            </a>
           </li>
         </ul>
       </li>
@@ -76,7 +93,14 @@ export default defineComponent({
     },
   },
   data() {
-    return {};
+    return {
+      activeIndex: {
+        type: Number,
+      },
+      activeRoot: {
+        type: Number,
+      },
+    };
   },
   methods: {
     convert(str: string) {
@@ -90,7 +114,20 @@ export default defineComponent({
         return str;
       }
     },
-    navigate(url: string) {
+    navigate(url: string, index: number) {
+      if (this.activeIndex === index) {
+        this.activeIndex = null;
+      } else {
+        this.activeIndex = index;
+      }
+      this.$emit("navigate", url);
+    },
+    navigateRoot(url: string, index: number) {
+      if (this.activeRoot === index) {
+        this.activeRoot = null;
+      } else {
+        this.activeRoot = index;
+      }
       this.$emit("navigate", url);
     },
   },
